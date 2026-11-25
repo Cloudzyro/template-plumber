@@ -1,0 +1,110 @@
+---
+import { pricing, formatPrice } from "../data/site";
+interface Props {
+  limit?: number;
+}
+const { limit } = Astro.props;
+const rows = limit ? pricing.jobs.slice(0, limit) : pricing.jobs;
+---
+
+<div class="price-table">
+  <table>
+    <caption class="sr">Typical prices for common jobs, parts included</caption>
+    <thead>
+      <tr>
+        <th scope="col">Job</th>
+        <th scope="col" class="num">Most jobs land between</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((r) => (
+          <tr>
+            <th scope="row">{r.job}</th>
+            <td class="num">
+              {formatPrice(r.from)} <span class="to">to</span> {formatPrice(r.to)}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .price-table {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 400;
+    vertical-align: baseline;
+  }
+  thead th {
+    font-size: 14px;
+    color: var(--ink-3);
+    background: var(--raised);
+    padding-block: 12px;
+  }
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+  .num {
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  thead .num {
+    font-weight: 400;
+  }
+  .to {
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  @media (max-width: 560px) {
+    th,
+    td {
+      padding: 14px 16px;
+    }
+    tbody th {
+      padding-bottom: 0;
+      display: block;
+      border-bottom: 0;
+    }
+    tbody td {
+      display: block;
+      text-align: left;
+      padding-top: 4px;
+    }
+    tbody tr {
+      display: block;
+      border-bottom: 1px solid var(--line);
+    }
+    tbody tr:last-child {
+      border-bottom: 0;
+    }
+    tbody td {
+      border-bottom: 0;
+    }
+    thead {
+      display: none;
+    }
+  }
+</style>

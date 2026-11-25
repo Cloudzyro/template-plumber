@@ -1,0 +1,100 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import PriceTable from "../components/PriceTable.astro";
+import { site, pricing, formatPrice } from "../data/site";
+---
+
+<Base title="Pricing guide" description="What plumbing costs at Halvorsen Plumbing & Drain: service call, hourly labor, after-hours rates and typical prices for common jobs.">
+  <PageHead
+    title="Pricing guide"
+    intro="What we charge, written down. Ranges cover most jobs; we confirm a fixed price on site before any work starts."
+  />
+
+  <section class="wrap rates-section" aria-label="Rates">
+    <div class="rate">
+      <p class="label">{pricing.callOut.label}</p>
+      <p class="figure">{formatPrice(pricing.callOut.price)}</p>
+    </div>
+    <div class="rate">
+      <p class="label">{pricing.hourly.label}</p>
+      <p class="figure">{formatPrice(pricing.hourly.price)}</p>
+    </div>
+    <div class="rate wide">
+      <p class="label">{pricing.afterHours.label}</p>
+      <p class="figure">1.5x labor</p>
+      <p class="note">{pricing.afterHours.note}</p>
+    </div>
+  </section>
+
+  <section class="wrap jobs" aria-labelledby="jobs-title">
+    <div class="jobs-head">
+      <h2 id="jobs-title" class="display">Common jobs</h2>
+      <ul class="notes">
+        {pricing.notes.map((n) => <li>{n}</li>)}
+      </ul>
+    </div>
+    <PriceTable />
+    <p class="after">
+      Don't see your job? <a class="text-link" href="/quote">Ask for a quote</a> or call <a class="text-link" href={site.phoneHref}>{site.phone}</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .rates-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .rate {
+    padding: 24px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+  .label {
+    color: var(--ink-2);
+    font-size: 16px;
+  }
+  .figure {
+    font: 600 48px/1 var(--font-display);
+    margin-top: 12px;
+  }
+  .rate .note {
+    margin-top: 8px;
+    color: var(--ink-3);
+    font-size: 15px;
+  }
+  .jobs {
+    padding-block: 64px 96px;
+  }
+  .jobs-head {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 32px;
+    margin-bottom: 32px;
+    align-items: end;
+  }
+  .notes {
+    display: grid;
+    gap: 4px;
+    color: var(--ink-2);
+    font-size: 16px;
+  }
+  .notes li {
+    padding-left: 16px;
+    border-left: 2px solid var(--line);
+  }
+  .after {
+    margin-top: 24px;
+    color: var(--ink-2);
+  }
+  @media (max-width: 860px) {
+    .rates-section,
+    .jobs-head {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  review: { name: string; town: string; job: string; date: string; text: string };
+}
+const { review } = Astro.props;
+---
+
+<figure class="review">
+  <blockquote>{review.text}</blockquote>
+  <figcaption>
+    <span class="who">{review.name}, {review.town}</span>
+    <span class="meta">{review.job} · {review.date}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .review {
+    display: grid;
+    gap: 16px;
+    align-content: space-between;
+    padding: 24px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+  blockquote {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  figcaption {
+    display: grid;
+    gap: 2px;
+    font-size: 15px;
+  }
+  .who {
+    font-weight: 500;
+  }
+  .meta {
+    color: var(--ink-3);
+  }
+</style>

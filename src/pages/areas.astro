@@ -1,0 +1,127 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Icon from "../components/Icon.astro";
+import { site, areas, areaNote } from "../data/site";
+---
+
+<Base title="Areas served" description="Towns and ZIP codes Halvorsen Plumbing & Drain serves across Marlow County, Minnesota, with no trip charge.">
+  <PageHead title="Areas we serve" intro={areaNote} />
+
+  <section class="wrap areas" aria-label="Towns and ZIP codes">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Town</th>
+          <th scope="col">ZIP codes</th>
+          <th scope="col" class="trip">Trip charge</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          areas.map((a) => (
+            <tr>
+              <th scope="row">
+                <Icon name="pin" size={16} />
+                {a.town}
+                {a.note && <span class="tag">{a.note}</span>}
+              </th>
+              <td>{a.zips.join(", ")}</td>
+              <td class="trip">None</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <aside class="aside">
+      <h2>Not on the list?</h2>
+      <p>Call and give us your ZIP code. If we can't get to you, we'll tell you straight away and suggest someone who can.</p>
+      <a class="btn btn-ink" href={site.phoneHref}><Icon name="phone" />{site.phone}</a>
+    </aside>
+  </section>
+</Base>
+
+<style>
+  .areas {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 32px;
+    align-items: start;
+    padding-block: 48px 96px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 400;
+  }
+  thead th {
+    background: var(--raised);
+    color: var(--ink-3);
+    font-size: 14px;
+    padding-block: 12px;
+  }
+  tbody th {
+    font-weight: 500;
+  }
+  tbody th :global(svg) {
+    display: inline-block;
+    vertical-align: -2px;
+    margin-right: 8px;
+    color: var(--ink-3);
+  }
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+  .tag {
+    margin-left: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--copper-ink);
+  }
+  .trip {
+    color: var(--ink-2);
+  }
+  .aside {
+    display: grid;
+    gap: 12px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--raised);
+  }
+  .aside h2 {
+    font: 600 26px/1.1 var(--font-display);
+  }
+  .aside p {
+    color: var(--ink-2);
+    margin-bottom: 8px;
+  }
+  .aside .btn {
+    justify-self: start;
+  }
+  @media (max-width: 860px) {
+    .areas {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .trip {
+      display: none;
+    }
+    th,
+    td {
+      padding-inline: 14px;
+    }
+  }
+</style>

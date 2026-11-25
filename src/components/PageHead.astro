@@ -1,0 +1,33 @@
+---
+import Elbow from "./Elbow.astro";
+interface Props {
+  title: string;
+  intro?: string;
+}
+const { title, intro } = Astro.props;
+---
+
+<header class="page-head dark">
+  <div class="wrap inner">
+    <h1 class="display">{title}</h1>
+    {intro && <p class="lede">{intro}</p>}
+    <slot />
+  </div>
+  <Elbow dark />
+</header>
+
+<style>
+  .page-head {
+    padding-top: clamp(48px, 7vw, 88px);
+  }
+  .inner {
+    padding-bottom: 40px;
+  }
+  h1 {
+    font-size: clamp(44px, 6vw, 68px);
+    max-width: 16ch;
+  }
+  .lede {
+    margin-top: 20px;
+  }
+</style>

@@ -1,0 +1,39 @@
+---
+// Signature: a copper 90-degree elbow fitting, used only as a section divider.
+interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props;
+---
+
+<div class:list={["elbow wrap", { dark }]} aria-hidden="true">
+  <span class="run"></span>
+  <svg width="40" height="40" viewBox="0 0 40 40">
+    <path d="M0 14h12a14 14 0 0 1 14 14v12" fill="none" stroke="var(--pipe)" stroke-width="8" />
+    <rect x="8" y="9" width="6" height="18" rx="1.5" fill="var(--fit)" />
+    <rect x="17" y="30" width="18" height="6" rx="1.5" fill="var(--fit)" transform="translate(-4 -4)" />
+  </svg>
+</div>
+
+<style>
+  .elbow {
+    --pipe: #c7c2b6;
+    --fit: var(--copper);
+    display: flex;
+    align-items: start;
+    height: 40px;
+  }
+  .elbow.dark {
+    --pipe: #3a4a63;
+  }
+  .run {
+    flex: 1;
+    height: 8px;
+    margin-top: 10px;
+    background: var(--pipe);
+    border-radius: 2px 0 0 2px;
+  }
+  svg {
+    flex: none;
+  }
+</style>

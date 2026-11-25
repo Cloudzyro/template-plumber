@@ -1,0 +1,79 @@
+---
+// The hero drawing: a copper supply run on a wall, with a brass ball valve,
+// a tee down to a pressure gauge and pipe straps. Drawn in code, no photos.
+const run = "M140 470 V196 A46 46 0 0 1 186 150 H404 A46 46 0 0 1 450 196 V470";
+---
+
+<svg class="pipe-run" viewBox="0 0 580 470" role="img" aria-labelledby="pipe-title">
+  <title id="pipe-title">Copper water pipes on a wall with a shutoff valve and a pressure gauge reading 62 psi</title>
+  <!-- wall: plywood panel with seams -->
+  <rect x="0" y="0" width="580" height="470" rx="14" fill="#172438" />
+  <path d="M0 236 H580 M290 0 V236 M150 236 V470 M436 236 V470" stroke="#1e2d44" stroke-width="2" />
+  <g fill="#23344e">
+    <circle cx="24" cy="24" r="3" /><circle cx="556" cy="24" r="3" /><circle cx="24" cy="446" r="3" /><circle cx="556" cy="446" r="3" />
+    <circle cx="266" cy="24" r="3" /><circle cx="314" cy="24" r="3" />
+  </g>
+
+  <!-- pipe shadow on the wall -->
+  <path d={run} fill="none" stroke="#0c1524" stroke-width="22" transform="translate(8 8)" />
+  <path d="M296 150 V352" stroke="#0c1524" stroke-width="18" transform="translate(8 8)" />
+
+  <!-- copper pipe with a highlight from the upper left -->
+  <path d={run} fill="none" stroke="#b86a37" stroke-width="22" />
+  <path d={run} fill="none" stroke="#d98d58" stroke-width="7" transform="translate(-5 -5)" opacity="0.9" />
+  <path d="M296 150 V352" stroke="#b86a37" stroke-width="18" />
+  <path d="M291 156 V352" stroke="#d98d58" stroke-width="5" opacity="0.9" />
+
+  <!-- couplings and the tee -->
+  <g fill="#9a5528">
+    <rect x="126" y="214" width="28" height="12" rx="2" />
+    <rect x="198" y="136" width="12" height="28" rx="2" />
+    <rect x="380" y="136" width="12" height="28" rx="2" />
+    <rect x="436" y="214" width="28" height="12" rx="2" />
+    <rect x="278" y="134" width="36" height="32" rx="3" />
+    <rect x="282" y="300" width="28" height="10" rx="2" />
+  </g>
+
+  <!-- pipe straps -->
+  <g fill="#8a94a6">
+    <rect x="124" y="402" width="32" height="9" rx="2" />
+    <rect x="434" y="402" width="32" height="9" rx="2" />
+    <rect x="236" y="134" width="9" height="32" rx="2" />
+    <rect x="346" y="134" width="9" height="32" rx="2" />
+  </g>
+  <g fill="#5d677a">
+    <circle cx="118" cy="406" r="3" /><circle cx="162" cy="406" r="3" />
+    <circle cx="428" cy="406" r="3" /><circle cx="472" cy="406" r="3" />
+  </g>
+
+  <!-- brass ball valve on the riser -->
+  <g>
+    <rect x="124" y="312" width="32" height="12" rx="2" fill="#8c6f2c" />
+    <rect x="124" y="364" width="32" height="12" rx="2" fill="#8c6f2c" />
+    <rect x="118" y="322" width="44" height="44" rx="8" fill="#c39a45" />
+    <rect x="124" y="328" width="10" height="32" rx="4" fill="#ddb868" />
+    <circle cx="140" cy="344" r="7" fill="#8c6f2c" />
+    <rect x="140" y="338" width="96" height="13" rx="6" fill="#b5463b" />
+    <rect x="144" y="339" width="88" height="4" rx="2" fill="#cf6457" />
+  </g>
+
+  <!-- pressure gauge on the tee branch -->
+  <g>
+    <rect x="288" y="352" width="16" height="16" fill="#8c6f2c" />
+    <circle cx="296" cy="398" r="38" fill="#d9dee6" />
+    <circle cx="296" cy="398" r="31" fill="#f3f1ea" />
+    <g stroke="#5d677a" stroke-width="2" stroke-linecap="round">
+      <path d="M271 413 l5 -3" /><path d="M267 398 h6" /><path d="M271 383 l5 3" /><path d="M282 372 l3 5" />
+      <path d="M296 368 v6" /><path d="M310 372 l-3 5" /><path d="M321 383 l-5 3" /><path d="M325 398 h-6" /><path d="M321 413 l-5 -3" />
+    </g>
+    <path d="M296 398 L314 382" stroke="#b5463b" stroke-width="3" stroke-linecap="round" />
+    <circle cx="296" cy="398" r="4" fill="#161b24" />
+  </g>
+</svg>
+
+<style>
+  .pipe-run {
+    width: 100%;
+    height: auto;
+  }
+</style>

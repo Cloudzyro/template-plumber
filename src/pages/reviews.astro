@@ -1,0 +1,32 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Review from "../components/Review.astro";
+import { reviews } from "../data/site";
+---
+
+<Base title="Reviews" description="What customers in Marlow County say about Halvorsen Plumbing & Drain.">
+  <PageHead title="Reviews" intro="What customers said after the job was done.">
+    <p class="sample-note">Sample reviews written for this template. Replace them with real ones from your customers.</p>
+  </PageHead>
+  <section class="wrap grid" aria-label="Customer reviews">
+    {reviews.map((r) => <Review review={r} />)}
+  </section>
+</Base>
+
+<style>
+  .sample-note {
+    margin-top: 16px;
+    color: var(--on-navy-3);
+    font-size: 15px;
+  }
+  .grid {
+    columns: 3 320px;
+    column-gap: 16px;
+    padding-block: 48px 96px;
+  }
+  .grid > :global(*) {
+    break-inside: avoid;
+    margin-bottom: 16px;
+  }
+</style>

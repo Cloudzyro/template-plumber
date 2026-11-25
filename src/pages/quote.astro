@@ -1,0 +1,83 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import QuoteForm from "../components/QuoteForm.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site";
+---
+
+<Base title="Get a quote" description="Ask Halvorsen Plumbing & Drain for a fixed-price plumbing quote. We call back within two working hours.">
+  <PageHead title="Get a quote" intro="Tell us what's wrong and where. We call back within two working hours with a price, or a time to come and look." />
+
+  <section class="wrap layout">
+    <QuoteForm />
+    <aside class="side">
+      <div class="urgent-card dark">
+        <h2>Water running now?</h2>
+        <ol>
+          <li>Turn off the main shutoff valve, usually where the water line enters the house.</li>
+          <li>Switch off the water heater if the leak is near it.</li>
+          <li>Call us. A plumber answers, day or night.</li>
+        </ol>
+        <a class="btn btn-copper" href={site.phoneHref}><Icon name="phone" />{site.phone}</a>
+      </div>
+      <dl class="facts">
+        <div><dt>Service call</dt><dd>Waived if we do the work</dd></div>
+        <div><dt>Warranty</dt><dd>Two years on labor</dd></div>
+        <div><dt>License</dt><dd>{site.license}</dd></div>
+      </dl>
+    </aside>
+  </section>
+</Base>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 32px;
+    align-items: start;
+    padding-block: 48px 96px;
+  }
+  .side {
+    display: grid;
+    gap: 24px;
+  }
+  .urgent-card {
+    background: var(--navy-1);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    display: grid;
+    gap: 16px;
+  }
+  .urgent-card h2 {
+    font: 600 28px/1.1 var(--font-display);
+  }
+  .urgent-card ol {
+    list-style: decimal;
+    padding-left: 20px;
+    color: var(--on-navy-2);
+    display: grid;
+    gap: 8px;
+    font-size: 16px;
+  }
+  .urgent-card .btn {
+    justify-self: start;
+  }
+  .facts {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+  .facts div {
+    padding-block: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .facts dt {
+    color: var(--ink-3);
+  }
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,201 @@
+---
+import { site } from "../data/site";
+import Icon from "./Icon.astro";
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<header class="site-header dark">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label={`${site.name}, home`}>
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+        <path d="M4 9h8a6 6 0 0 1 6 6v9" fill="none" stroke="#3a4a63" stroke-width="6" />
+        <rect x="9" y="5" width="4" height="8" rx="1" fill="var(--copper)" />
+        <rect x="14" y="18" width="8" height="4" rx="1" fill="var(--copper)" />
+      </svg>
+      <span>
+        <strong>Halvorsen</strong>
+        <small>Plumbing &amp; Drain</small>
+      </span>
+    </a>
+
+    <nav aria-label="Main">
+      <ul id="nav-list" class="nav-list">
+        {
+          site.nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={path.startsWith(item.href) ? "page" : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="nav-quote"><a href="/quote" aria-current={path === "/quote" ? "page" : undefined}>Get a quote</a></li>
+      </ul>
+    </nav>
+
+    <a class="emergency" href={site.phoneHref}>
+      <span class="emergency-label">24-hour emergency line</span>
+      <span class="emergency-number"><Icon name="phone" />{site.phone}</span>
+    </a>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-list">
+      <span class="open"><Icon name="menu" size={20} /></span>
+      <span class="shut"><Icon name="close" size={20} /></span>
+      <span class="sr">Menu</span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>(".menu-btn");
+  const header = document.querySelector(".site-header");
+  btn?.addEventListener("click", () => {
+    const open = btn.getAttribute("aria-expanded") !== "true";
+    btn.setAttribute("aria-expanded", String(open));
+    header?.classList.toggle("is-open", open);
+  });
+</script>
+
+<style>
+  .site-header {
+    background: var(--navy-0);
+    border-bottom: 1px solid var(--line-navy);
+    position: relative;
+    z-index: 20;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    min-height: 72px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-right: auto;
+  }
+  .logo span {
+    display: grid;
+    line-height: 1;
+  }
+  .logo strong {
+    font: 600 24px/1 var(--font-display);
+  }
+  .logo small {
+    font-size: 13px;
+    color: var(--on-navy-2);
+    margin-top: 4px;
+  }
+  .nav-list {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-list a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--on-navy-2);
+    transition: color 150ms var(--ease), background-color 150ms var(--ease);
+  }
+  .nav-list a:hover {
+    color: var(--on-navy);
+    background: var(--navy-2);
+  }
+  .nav-list a[aria-current="page"] {
+    color: var(--on-navy);
+    background: var(--navy-2);
+  }
+  .nav-quote a {
+    color: var(--on-navy);
+  }
+  .emergency {
+    display: grid;
+    gap: 2px;
+    text-decoration: none;
+    padding-left: 24px;
+    border-left: 1px solid var(--line-navy);
+  }
+  .emergency-label {
+    font-size: 13px;
+    color: var(--on-navy-2);
+  }
+  .emergency-number {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: 600 22px/1 var(--font-display);
+    color: var(--copper);
+  }
+  .emergency:hover .emergency-number {
+    color: #e8a072;
+  }
+  .menu-btn {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(238, 241, 245, 0.2);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--on-navy);
+    cursor: pointer;
+  }
+  .menu-btn .shut,
+  .is-open .menu-btn .open {
+    display: none;
+  }
+  .is-open .menu-btn .shut {
+    display: block;
+  }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  @media (max-width: 1000px) {
+    .emergency-label {
+      display: none;
+    }
+    .bar {
+      gap: 16px;
+    }
+  }
+  @media (max-width: 860px) {
+    .emergency {
+      display: none;
+    }
+    .menu-btn {
+      display: inline-flex;
+    }
+    nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--navy-0);
+      border-bottom: 1px solid var(--line-navy);
+      display: none;
+    }
+    .is-open nav {
+      display: block;
+    }
+    .nav-list {
+      flex-direction: column;
+      padding: 8px 16px 16px;
+      gap: 2px;
+    }
+    .nav-list a {
+      padding: 12px;
+      font-size: 17px;
+    }
+  }
+</style>

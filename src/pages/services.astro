@@ -1,0 +1,158 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Icon from "../components/Icon.astro";
+import { services, formatPrice } from "../data/site";
+---
+
+<Base title="Services" description="Drain cleaning, water heaters, leaks and repipes, fixtures and sewer camera inspections in Marlow County, Minnesota.">
+  <PageHead
+    title="Plumbing services"
+    intro="Five kinds of work, done by the same small crew. Every job starts with a fixed price you agree to."
+  >
+    <nav class="jump" aria-label="Services on this page">
+      {services.map((s) => <a href={`#${s.slug}`}>{s.name}</a>)}
+    </nav>
+  </PageHead>
+
+  <div class="wrap list">
+    {
+      services.map((s, i) => (
+        <section id={s.slug} class="service" aria-labelledby={`${s.slug}-title`}>
+          <p class="num">{String(i + 1).padStart(2, "0")}</p>
+          <div class="body">
+            <h2 id={`${s.slug}-title`} class="display">
+              {s.name}
+            </h2>
+            <p class="summary">{s.summary}</p>
+            <ul class="jobs">
+              {s.jobs.map((j) => (
+                <li>
+                  <Icon name="check" size={16} />
+                  {j}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <aside class="side">
+            <p class="from">
+              <span>From</span>
+              {formatPrice(s.from)}
+            </p>
+            <p class="time">
+              <Icon name="clock" size={16} />
+              {s.time}
+            </p>
+            <a class="btn btn-ink" href={`/quote?job=${s.slug}`}>
+              Get a quote
+            </a>
+          </aside>
+        </section>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+  }
+  .jump a {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(238, 241, 245, 0.18);
+    text-decoration: none;
+    font-size: 15px;
+    color: var(--on-navy-2);
+    transition: color 150ms var(--ease), background-color 150ms var(--ease);
+  }
+  .jump a:hover {
+    color: var(--on-navy);
+    background: var(--navy-2);
+  }
+  .list {
+    padding-block: 32px 96px;
+  }
+  .service {
+    display: grid;
+    grid-template-columns: 64px 1fr 280px;
+    gap: 32px;
+    padding-block: 48px;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 16px;
+  }
+  .num {
+    font: 500 22px/1.2 var(--font-display);
+    color: var(--copper-ink);
+  }
+  h2 {
+    font-size: clamp(32px, 3.6vw, 40px);
+  }
+  .summary {
+    margin-top: 12px;
+    color: var(--ink-2);
+    max-width: 36rem;
+  }
+  .jobs {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+  }
+  .jobs li {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .jobs svg {
+    color: var(--copper-ink);
+    flex: none;
+    transform: translateY(2px);
+  }
+  .side {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+    padding: 24px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+  .from {
+    display: grid;
+    font: 600 40px/1 var(--font-display);
+  }
+  .from span {
+    font: 400 15px/1.4 var(--font-body);
+    color: var(--ink-3);
+  }
+  .time {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .time svg {
+    flex: none;
+    transform: translateY(2px);
+    color: var(--ink-3);
+  }
+  @media (max-width: 900px) {
+    .service {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .num {
+      margin-bottom: -12px;
+    }
+  }
+  @media (max-width: 560px) {
+    .jobs {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

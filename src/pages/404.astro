@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import { site } from "../data/site";
+---
+
+<Base title="Page not found">
+  <PageHead title="This page isn't here" intro="The address may have changed, or the link was mistyped.">
+    <div class="actions">
+      <a class="btn btn-copper" href="/">Home page</a>
+      <a class="btn btn-line" href={site.phoneHref}>Call {site.phone}</a>
+    </div>
+  </PageHead>
+  <div class="space"></div>
+</Base>
+
+<style>
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+  .space {
+    height: 96px;
+  }
+</style>

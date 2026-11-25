@@ -1,0 +1,23 @@
+{
+  "name": "template-plumber",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A plumbing and trade business website template built with Astro: emergency call button, services, areas served, pricing guide, reviews and a quote form.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource/barlow": "5.3.0",
+    "@fontsource/barlow-condensed": "5.3.0",
+    "astro": "7.4.10"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "packageManager": "pnpm@12.10.1"
+}

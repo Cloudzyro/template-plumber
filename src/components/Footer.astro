@@ -1,0 +1,130 @@
+---
+import { site } from "../data/site";
+---
+
+<footer class="site-footer dark">
+  <div class="wrap grid">
+    <div>
+      <p class="name">{site.name}</p>
+      <p class="muted">Family owned in Marlow County since {site.since}</p>
+      <p class="muted">{site.license}</p>
+      <p class="muted">{site.insured}</p>
+    </div>
+    <div>
+      <p class="head">Call</p>
+      <a class="phone" href={site.phoneHref}>{site.phone}</a>
+      <p class="muted">{site.emergencyNote}</p>
+      <a class="muted link" href={`mailto:${site.email}`}>{site.email}</a>
+    </div>
+    <div>
+      <p class="head">Hours</p>
+      <dl>
+        {
+          site.hours.map((h) => (
+            <div>
+              <dt>{h.days}</dt>
+              <dd>{h.time}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+    <div>
+      <p class="head">Shop</p>
+      <address class="muted">
+        {site.address.street}<br />
+        {site.address.city}, {site.address.region} {site.address.postal}
+      </address>
+      <ul class="links">
+        {site.nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        <li><a href="/quote">Get a quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap base">
+    <p>&copy; {new Date().getFullYear()} {site.name}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy-0);
+    padding-top: 64px;
+    font-size: 15px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .name {
+    font: 600 24px/1.1 var(--font-display);
+    margin-bottom: 12px;
+  }
+  .head {
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .muted {
+    color: var(--on-navy-2);
+    display: block;
+    font-style: normal;
+    margin-bottom: 4px;
+  }
+  .link,
+  .links a {
+    text-decoration: none;
+    transition: color 150ms var(--ease);
+  }
+  .link:hover,
+  .links a:hover {
+    color: var(--on-navy);
+  }
+  .phone {
+    font: 600 26px/1 var(--font-display);
+    color: var(--copper);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+  }
+  dl div {
+    margin-bottom: 8px;
+  }
+  dt {
+    color: var(--on-navy);
+  }
+  dd {
+    color: var(--on-navy-2);
+  }
+  .links {
+    margin-top: 16px;
+    display: grid;
+    gap: 4px;
+  }
+  .links a {
+    color: var(--on-navy-2);
+  }
+  .base {
+    margin-top: 48px;
+    padding-block: 24px;
+    border-top: 1px solid var(--line-navy);
+    color: var(--on-navy-3);
+    font-size: 14px;
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 860px) {
+    .site-footer {
+      padding-bottom: 80px;
+    }
+  }
+  @media (max-width: 520px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>
