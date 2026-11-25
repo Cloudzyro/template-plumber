@@ -14,7 +14,6 @@ import { site, areas, areaNote } from "../data/site";
         <tr>
           <th scope="col">Town</th>
           <th scope="col">ZIP codes</th>
-          <th scope="col" class="trip">Trip charge</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +26,6 @@ import { site, areas, areaNote } from "../data/site";
                 {a.note && <span class="tag">{a.note}</span>}
               </th>
               <td>{a.zips.join(", ")}</td>
-              <td class="trip">None</td>
             </tr>
           ))
         }
@@ -89,9 +87,6 @@ import { site, areas, areaNote } from "../data/site";
     font-size: 14px;
     color: var(--copper-ink);
   }
-  .trip {
-    color: var(--ink-2);
-  }
   .aside {
     display: grid;
     gap: 12px;
@@ -101,7 +96,7 @@ import { site, areas, areaNote } from "../data/site";
     background: var(--raised);
   }
   .aside h2 {
-    font: 600 26px/1.1 var(--font-display);
+    font: 500 26px/1.1 var(--font-display);
   }
   .aside p {
     color: var(--ink-2);
@@ -116,9 +111,6 @@ import { site, areas, areaNote } from "../data/site";
     }
   }
   @media (max-width: 520px) {
-    .trip {
-      display: none;
-    }
     th,
     td {
       padding-inline: 14px;

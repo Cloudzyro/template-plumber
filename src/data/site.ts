@@ -34,7 +34,7 @@ export const site = {
     { href: "/reviews", label: "Reviews" },
   ],
   quoteTopics: ["Drain or sewer", "Water heater", "Leak or repipe", "Fixture install", "Camera inspection", "Something else"],
-  urgency: ["It's an emergency (water is running now)", "In the next day or two", "This week", "Planning ahead"],
+  urgency: ["Emergency, water is running now", "In the next day or two", "This week", "Planning ahead"],
 };
 
 export type Service = {

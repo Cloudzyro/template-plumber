@@ -17,9 +17,8 @@ import { services, formatPrice } from "../data/site";
 
   <div class="wrap list">
     {
-      services.map((s, i) => (
+      services.map((s) => (
         <section id={s.slug} class="service" aria-labelledby={`${s.slug}-title`}>
-          <p class="num">{String(i + 1).padStart(2, "0")}</p>
           <div class="body">
             <h2 id={`${s.slug}-title`} class="display">
               {s.name}
@@ -78,15 +77,11 @@ import { services, formatPrice } from "../data/site";
   }
   .service {
     display: grid;
-    grid-template-columns: 64px 1fr 280px;
+    grid-template-columns: 1fr 280px;
     gap: 32px;
     padding-block: 48px;
     border-bottom: 1px solid var(--line);
     scroll-margin-top: 16px;
-  }
-  .num {
-    font: 500 22px/1.2 var(--font-display);
-    color: var(--copper-ink);
   }
   h2 {
     font-size: clamp(32px, 3.6vw, 40px);
@@ -145,9 +140,6 @@ import { services, formatPrice } from "../data/site";
     .service {
       grid-template-columns: 1fr;
       gap: 20px;
-    }
-    .num {
-      margin-bottom: -12px;
     }
   }
   @media (max-width: 560px) {
